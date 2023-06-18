@@ -3,7 +3,7 @@ const express = require("express")
 const {MongoClient, ObjectId} = require("mongodb")
 
 
-const uri = 'mongodb+srv://admin:admin@cluster0.49jaesh.mongodb.net/?retryWrites=true&w=majority'
+const uri = process.env.URI
 
 
 class usuariosServices{
@@ -12,11 +12,11 @@ class usuariosServices{
 
 
     //find()
-    async find(){
+    async find(limit, offset){
         const client = new MongoClient(uri) // usamos el mongoclient y le pasamos la uri, para acceder a la base de datos 
         try {
             await client.connect() 
-            const usuarios = await client.db("psbarber").collection("usuarios").find({}).toArray();
+            const usuarios = await client.db("psbarber").collection("usuarios").find({}).skip(Number(offset)).limit(Number(limit)).toArray();
             return usuarios
         } catch (e) {
             console.error(e);

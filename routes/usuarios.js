@@ -10,9 +10,11 @@ const service = new usuariosServices()
 
 //get leer  todos los datos de usuarios
 router.get("/", async (req, res) => {
-    const usuarios =await service.find();
+    const { limit, offset } = req.query;
+    const usuarios = await service.find();
     if(usuarios){
-        res.status(200).send(usuarios);
+        // res.status(200).send(usuarios);
+        res.render('./inicio/index.ejs', {usuarios});
     }else{
         res.status(404).send("No se encontro la informacion");
     }

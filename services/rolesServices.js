@@ -3,7 +3,7 @@ const express = require("express")
 const {MongoClient, ObjectId} = require("mongodb")
 
 
-const uri = 'mongodb+srv://admin:admin@cluster0.49jaesh.mongodb.net/?retryWrites=true&w=majority'
+const uri = process.env.URI
 
 
 class rolesServices{
