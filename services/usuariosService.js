@@ -31,11 +31,11 @@ class usuariosServices{
 
     //Create 
     // insertMany
-    async insertMany(body){
+    async insertOne(body){
         const client = new MongoClient(uri)
         try {
             await client.connect()
-            const result =  await client.db("psbarber").collection("usuarios").insertMany(body)
+            const result =  await client.db("psbarber").collection("usuarios").insertOne(body)
             return result
         } catch (error) {
             console.error(error);

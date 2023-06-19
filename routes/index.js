@@ -10,8 +10,8 @@ const ventasRouter = require('./ventas');
 const inicio = require('./inicio');
 
 const rutasApi = (app) =>{
-    const router = express.Router();
-    // app.use("/", inicio.PantallaPrincipal)
+    
+    app.get("/", inicio.PantallaPrincipal)
     app.use("/usuarios", routesUsuarios)
     app.use("/roles",routesRoles)
     app.use("/permisos",routesPermisos)

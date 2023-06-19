@@ -1,0 +1,105 @@
+<%- include("../partials/header")%>
+
+    <!-- Button trigger modal -->
+    <div class="container">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Agregar usuario
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Agregar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-ms-10">
+                            <form action="/usuarios" method="post">
+                                <div class="form-group mt-2">
+                                    <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="apellido" placeholder="apellido"
+                                        class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="email" placeholder="email" class="form-control">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="contraseña" placeholder="contraseña"
+                                        class="form-control">
+                                </div>
+
+                                <div class="form-group mt-2 invisible">
+                                    <input type="text" name="estado" placeholder="estado" class="form-control"  value="true">
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mt-4"required>Guardar</button>
+                                    <button type="button" class="btn btn-secondary mt-4"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div>
+        <table class="table ">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contraseña</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <% if(usuarios){ %>
+                <% for(let i=0; i < usuarios.length; i++ ){%>
+                    <tr>
+                        <td>
+                            <%= (i+1) %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].nombre %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].apellido %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].email %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].contraseña %>
+                        </td>
+                        <td>
+                            <%= usuarios[i].estado %>
+                        </td>
+                    </tr>
+                    <%} %>
+                        <% } %>
+                            </tbody>
+
+        </table>
+    </div>
+
+
+    <%- include("../partials/footer")%>
+
+
+
+        <!-- 
+    {
+        "nombre": "lucas",
+        "apellido": "dalto",
+        "contraseña": "1234",
+        "email": "lucas@gmail.com",
+        "estado": true
+    } -->

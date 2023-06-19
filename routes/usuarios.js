@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     const usuarios = await service.find();
     if(usuarios){
         // res.status(200).send(usuarios);
-        res.render('./inicio/index.ejs', {usuarios});
+        res.render('./usuarios/index.ejs', {usuarios});
     }else{
         res.status(404).send("No se encontro la informacion");
     }
@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) => {
 //crear usuarios
 router.post("/", async(req, res)=>{
    const body = req.body;
-    const usuarios = await service.insertMany(body);
+    const usuarios = await service.insertOne(body);
     if(usuarios){
         res.status(201).json({message: "se insertaron los en la base de datos ", usuarios})
     }else{
