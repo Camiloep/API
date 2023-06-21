@@ -59,6 +59,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Contraseña</th>
                     <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <% if(usuarios){ %>
@@ -81,6 +82,10 @@
                         </td>
                         <td>
                             <%= usuarios[i].estado %>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="usuarios/edit/<%=usuarios[i]._id%>">Editar</a>
+                            <a class="btn btn-danger" href="usuarios/eliminar/<%=usuarios[i]._id%>">Eliminar</a>
                         </td>
                     </tr>
                     <%} %>

@@ -1,6 +1,6 @@
 const render = {}
 
 render.PantallaPrincipal = (req,res)=>{
-    res.send("gola")
+    res.send("hola")
 }
 module.exports = render

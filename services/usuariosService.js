@@ -3,6 +3,7 @@ const express = require("express")
 const {MongoClient, ObjectId} = require("mongodb")
 
 
+
 const uri = process.env.URI
 
 
@@ -16,7 +17,7 @@ class usuariosServices{
         const client = new MongoClient(uri) // usamos el mongoclient y le pasamos la uri, para acceder a la base de datos 
         try {
             await client.connect() 
-            const usuarios = await client.db("psbarber").collection("usuarios").find({}).skip(Number(offset)).limit(Number(limit)).toArray();
+            const usuarios = await client.db("psbarber").collection("usuarios").find({}).toArray();
             return usuarios
         } catch (e) {
             console.error(e);
@@ -45,11 +46,11 @@ class usuariosServices{
     }
 
     //actualizar 
-    async updateOne(id, nombre, contraseña){
+    async updateOne(id, nombre, apellido, email, contraseña, estado){
         const client = new MongoClient(uri);        
         try {
             await client.connect();
-            const usuarios = await client.db("psbarber").collection("usuarios").updateOne({_id: new ObjectId(id)},{$set:{nombre: nombre, contraseña: contraseña}})
+            const usuarios = await client.db("psbarber").collection("usuarios").updateOne({_id: new ObjectId(id)},{$set:{nombre: nombre, apellido: apellido, email: email,contraseña: contraseña, estado:estado }})
             return usuarios;
         }catch(e){
             console.log(e);
