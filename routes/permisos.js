@@ -12,21 +12,22 @@ const service = new permisosServices()
 router.get("/", async (req, res) => {
     const permisos = await service.find({});
         if(permisos){
-            res.status(200).send(permisos) // la solicitud a tenido exito 
+            res.render("./permisos/permisos",{permisos})
+            // res.status(200).send(permisos) // la solicitud a tenido exito 
         }else{ 
             res.status(404).send("no se encontro la coleccion")
         }
 })
 
 // obtener roles por id 
-router.get('/:id', async (req, res) => {
+router.get('/edit/:id', async (req, res) => {
     const id = req.params.id;
     const client = new MongoClient(uri);
     try {
         await client.connect();
         const permisos = await client.db('psbarber').collection('permisos').findOne({_id: new ObjectId(id)});
         if (permisos) {
-            res.status(200).send(permisos)
+            res.render("./permisos/permisosEdit",{permisos})
         }else{
             res.status(400).send("No se encontro la informacion")
         }
@@ -41,22 +42,24 @@ router.get('/:id', async (req, res) => {
 //crear usuarios
 router.post("/", async(req, res)=>{
     const body = req.body
-    const permisos = await service.insertMany(body);
+    const permisos = await service.insertOne(body);
         if(permisos){
-            res.status(201).json({message: "se insertaron los roles en la base de datos ", permisos})
+            // res.status(201).json({message: "se insertaron los roles en la base de datos ", permisos})
+            res.redirect("/permisos")
         }else {
-            res.status(400).send("no se creo el rol correctamente")
+            res.status(400).send("no se creo correctamente")
         }
 })
 
 //actualizar roles por id
 
-router.patch("/:id", async(req, res) => {
+router.post("/update/:id", async(req, res) => {
     const id = req.params.id
-    const { nombre, id_rol  }= req.body;
-    const permisos = await service.updateOne(id, nombre, id_rol);
+    const { nombre, estado  }= req.body;
+    const permisos = await service.updateOne(id, nombre, estado);
         if(permisos){
-            res.status(201).json({message: "se actualizo el rol correctamente en la base de datos ",permisos})
+            // res.status(201).json({message: "se actualizo el rol correctamente en la base de datos ",permisos})
+            res.redirect("/permisos")
         }else{
             res.status(404).send("no se pudo actualizar el permisp")
         }
@@ -65,31 +68,32 @@ router.patch("/:id", async(req, res) => {
 
 
 // Actualizar varios uroles
-router.patch("/", async(req, res) => {
-    const body = req.body
-    client = new MongoClient(uri)
-    try {
-        await client.connect()
-        const permisos = await client.db("psbarber").collection("roles").updateMany({nombre : "andres"},{$set:{nombre: body.nombre}}) // todos los usuarios que tengan el nombre andress seran modificados
-        if(permisos){
-            res.status(201).json({message: "se actualizaron los permisos en la base de datos ",permisos})
-        }else{
-            res.status(404).send("no se pudieron actualizar los permisos ")
-        }
-    } catch (error) {
-        console.error(error);
-    }finally{
-        await client.close()
-    }
-})
+// router.patch("/", async(req, res) => {
+//     const body = req.body
+//     client = new MongoClient(uri)
+//     try {
+//         await client.connect()
+//         const permisos = await client.db("psbarber").collection("roles").updateMany({nombre : "andres"},{$set:{nombre: body.nombre}}) // todos los usuarios que tengan el nombre andress seran modificados
+//         if(permisos){
+//             res.status(201).json({message: "se actualizaron los permisos en la base de datos ",permisos})
+//         }else{
+//             res.status(404).send("no se pudieron actualizar los permisos ")
+//         }
+//     } catch (error) {
+//         console.error(error);
+//     }finally{
+//         await client.close()
+//     }
+// })
 
 
 // eliminar roles 
-router.delete('/:id', async (req, res) => {
+router.get('/eliminar/:id', async (req, res) => {
     const id = req.params.id;
     const permisos = await service.deleteOne(id)
         if (permisos) {
-            res.status(200).json({message: "se elimino el permiso correctamente ",permisos})
+            // res.status(200).json({message: "se elimino el permiso correctamente ",permisos})
+            res.redirect("/permisos")
         }else{
             res.status(400).send(" no se elimino el permiso correctamente")
         }

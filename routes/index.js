@@ -7,14 +7,15 @@ const proveedorRouter = require('./proveedorRouter');
 const clientesRouter = require('./clientes');
 const serviciosRouter = require('./servicios');
 const ventasRouter = require('./ventas');
+const inicioController = require("../controllers/inicioController")
 
 
-const inicio = require('./inicio');
+// const inicio = require('./inicio');
 
 
 const rutasApi = (app) =>{
     
-    app.get("/", inicio.PantallaPrincipal)
+    app.get("/", inicioController.inicio)
 
 
     app.use("/usuarios", routesUsuarios)

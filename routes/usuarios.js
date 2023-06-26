@@ -2,7 +2,7 @@ const express = require("express")
 const { MongoClient, ObjectId} = require('mongodb');
 const usuariosServices = require("../services/usuariosService")
 
-const consumir = {}
+
 const  uri = process.env.URI
 // CREAR las rutas 
 const router = express.Router()
@@ -45,7 +45,8 @@ router.post("/", async(req, res)=>{
    const body = req.body;
     const usuarios = await service.insertOne(body);
     if(usuarios){
-        res.status(201).json({message: "se insertaron los en la base de datos ", usuarios})
+        // res.status(201).json({message: "se insertaron los en la base de datos ", usuarios})
+        res.redirect("/usuarios")
     }else{
         res.status(400).send("no se creo el usuario ")
     }
@@ -81,7 +82,8 @@ router.post("/update/:id", async(req, res) => {
     const { nombre,apellido, email,contraseña,estado  }= req.body;
     const usuarios = await service.updateOne(id, nombre, apellido, email,contraseña,estado);
         if(usuarios){
-            res.status(201).json({message: "se actualizaron los usuarios en la base de datos ",usuarios})
+            // res.status(201).json({message: "se actualizaron los usuarios en la base de datos ",usuarios})
+            res.redirect("/usuarios")
         }else{
             res.status(404).send("no se pudieron actualizar los clientes ")
         }
@@ -115,7 +117,8 @@ router.get('/eliminar/:id', async (req, res) => {
     
     const usuarios = await service.deleteOne(id)
         if (usuarios) {
-            res.status(200).json({message: "se elimino el usuario correctamente ",usuarios})
+            // res.status(200).json({message: "se elimino el usuario correctamente ",usuarios})
+            res.redirect("/usuarios")
         }else{
             res.status(400).send(" no se elimino el usuario correctamente")
         }

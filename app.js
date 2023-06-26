@@ -33,7 +33,7 @@ rutasApi(app)
 //     res.render("index")
 // })
 
-
+app.use(express.static(path.join(__dirname, "public")))
 
 app.listen(app.get("port"),()=> {
     console.log(`se esta escuchando en el puerto ${app.get("port")}`);

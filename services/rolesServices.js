@@ -31,11 +31,11 @@ class rolesServices{
 
     //Create 
     // insertMany
-    async insertMany(body){
+    async insertOne(body){
         const client = new MongoClient(uri)
         try {
             await client.connect()
-            const result =  await client.db("psbarber").collection("roles").insertMany(body)
+            const result =  await client.db("psbarber").collection("roles").insertOne(body)
             return result
         } catch (error) {
             console.error(error);
@@ -45,11 +45,11 @@ class rolesServices{
     }
 
     //actualizar 
-    async updateOne(id, nombre, id_rol){
+    async updateOne(id, nombre, estado, id_rol){
         const client = new MongoClient(uri);        
         try {
             await client.connect();
-            const roles = await client.db("psbarber").collection("roles").updateOne({_id: new ObjectId(id)},{$set:{nombre: nombre, id_rol: id_rol}})
+            const roles = await client.db("psbarber").collection("roles").updateOne({_id: new ObjectId(id)},{$set:{nombre: nombre, estado:estado, id_rol: id_rol}})
             return roles;
         }catch(e){
             console.log(e);

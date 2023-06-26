@@ -30,11 +30,11 @@ class permisosServices{
 
     //Create 
     // insertMany
-    async insertMany(body){
+    async insertOne(body){
         const client = new MongoClient(uri)
         try {
             await client.connect()
-            const permisos =  await client.db("psbarber").collection("permisos").insertMany(body)
+            const permisos =  await client.db("psbarber").collection("permisos").insertOne(body)
             return permisos
         } catch (error) {
             console.error(error);
@@ -44,11 +44,11 @@ class permisosServices{
     }
 
     //actualizar 
-    async updateOne(id, nombre, id_rol){
+    async updateOne(id, nombre, estado){
         const client = new MongoClient(uri);        
         try {
             await client.connect();
-            const permisos = await client.db("psbarber").collection("permisos").updateOne({_id: new ObjectId(id)},{$set:{nombre: nombre, id_rol: id_rol}})
+            const permisos = await client.db("psbarber").collection("permisos").updateOne({_id: new ObjectId(id)},{$set:{nombre: nombre, estado: estado}})
             return permisos;
         }catch(e){
             console.log(e);

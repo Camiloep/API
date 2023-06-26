@@ -1,0 +1,79 @@
+<%- include("../partials/header")%>
+
+    <!-- Button trigger modal -->
+    <div class="container">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Agregar permisos
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Agregar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-ms-10">
+                            <form action="/permisos" method="post">
+                                <div class="form-group mt-2">
+                                    <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+                                </div>                                
+                                <div class="form-group mt-2 invisible">
+                                    <input type="text" name="estado" placeholder="estado" class="form-control" value="true" >
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mt-4"required>Guardar</button>
+                                    <button type="button" class="btn btn-secondary mt-4"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div>
+        <table class="table ">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+
+                </tr>
+            </thead>
+            <% if(permisos){ %>
+                <% for(let i=0; i < permisos.length; i++ ){%>
+                    <tr>
+                        <td>
+                            <%= (i+1) %>
+                        </td>
+                        <td>
+                            <%= permisos[i].nombre %>
+                        </td>
+                        <td>
+                            <%= permisos[i].estado %>
+                        </td>
+                       
+                       
+                        <td>
+                            <a class="btn btn-primary" href="permisos/edit/<%=permisos[i]._id%>">Editar</a>
+                            <a class="btn btn-danger" href="permisos/eliminar/<%=permisos[i]._id%>">Eliminar</a>
+                        </td>
+                    </tr>
+                    <%} %>
+                        <% } %>
+                            </tbody>
+
+        </table>
+    </div>
+
+
+    <%- include("../partials/footer")%>
+</html>
