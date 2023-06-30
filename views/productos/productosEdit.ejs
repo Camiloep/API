@@ -1,0 +1,42 @@
+<%- include("../partials/header") %>
+
+        <div class="container mx-5 my-5">
+            <div class="row mx-5">
+                <div class="col-md-8">
+                    <div class="card">
+                        <h5 class="modal-title text-center">Editar productos</h5>
+                        <div class="card-body">
+                            <form action="/productos/update/<%= productos._id %> " method="post">
+                                <div class="form-group mt-2">
+                                    <input type="text" name="id_Producto" value="<%= productos.id_Producto %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="nombre" value="<%= productos.nombre %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="precio" value="<%= productos.precio %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="cantidad" value="<%= productos.cantidad %>" class="form-control" required>
+                                </div>
+                                <select class="form-select mt-2" name="estado" id="estado" required>
+                                    <option value="<%= productos.estado %>" selected><%= productos.estado %></option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="fk_Proveedor" value="<%= productos.fk_Proveedor %>" class="form-control" required>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-success mt-4">Guardar</button>
+                                    <a class="btn btn-danger mt-4" href="/productos">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <%- include("../partials/footer") %>

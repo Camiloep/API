@@ -8,8 +8,7 @@
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -23,22 +22,22 @@
                                     <input type="text" name="nombre" placeholder="Nombre" class="form-control">
                                 </div>
                                 <div class="form-group mt-2">
-                                    <input type="text" name="apellido" placeholder="apellido"
-                                        class="form-control" required>
+                                    <input type="text" name="apellido" placeholder="apellido" class="form-control"
+                                        required>
                                 </div>
                                 <div class="form-group mt-2">
                                     <input type="text" name="email" placeholder="email" class="form-control">
                                 </div>
                                 <div class="form-group mt-2">
-                                    <input type="text" name="contraseña" placeholder="contraseña"
-                                        class="form-control">
+                                    <input type="text" name="contraseña" placeholder="contraseña" class="form-control">
                                 </div>
 
                                 <div class="form-group mt-2 invisible">
-                                    <input type="text" name="estado" placeholder="estado" class="form-control"  value="true">
+                                    <input type="text" name="estado" placeholder="estado" class="form-control"
+                                        value="true">
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary mt-4"required>Guardar</button>
+                                    <button type="submit" class="btn btn-primary mt-4" required>Guardar</button>
                                     <button type="button" class="btn btn-secondary mt-4"
                                         data-bs-dismiss="modal">Cancelar</button>
                                 </div>
@@ -49,50 +48,54 @@
             </div>
         </div>
 
-    <div>
-        <table class="table ">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Contraseña</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <% if(usuarios){ %>
-                <% for(let i=0; i < usuarios.length; i++ ){%>
-                    <tr>
-                        <td>
-                            <%= (i+1) %>
-                        </td>
-                        <td>
-                            <%= usuarios[i].nombre %>
-                        </td>
-                        <td>
-                            <%= usuarios[i].apellido %>
-                        </td>
-                        <td>
-                            <%= usuarios[i].email %>
-                        </td>
-                        <td>
-                            <%= usuarios[i].contraseña %>
-                        </td>
-                        <td>
-                            <%= usuarios[i].estado %>
-                        </td>
-                        <td>
-                            <a class="btn btn-primary" href="usuarios/edit/<%=usuarios[i]._id%>">Editar</a>
-                            <a class="btn btn-danger" href="usuarios/eliminar/<%=usuarios[i]._id%>">Eliminar</a>
-                        </td>
-                    </tr>
-                    <%} %>
-                        <% } %>
-                            </tbody>
-
-        </table>
+        <div class="mt-2">
+            <div class="col-md-12">
+                <table id="example" class="table table-bordered table-hover me-5">
+                    <thead class="bg-dark text-white text-center">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contraseña</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(usuarios){ %>
+                            <% for(let i=0; i < usuarios.length; i++ ){%>
+                                <tr>
+                                    <td>
+                                        <%= (i+1) %>
+                                    </td>
+                                    <td>
+                                        <%= usuarios[i].nombre %>
+                                    </td>
+                                    <td>
+                                        <%= usuarios[i].apellido %>
+                                    </td>
+                                    <td>
+                                        <%= usuarios[i].email %>
+                                    </td>
+                                    <td>
+                                        <%= usuarios[i].contraseña %>
+                                    </td>
+                                    <td>
+                                        <%= usuarios[i].estado %>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary" href="usuarios/edit/<%=usuarios[i]._id%>">Editar</a>
+                                        <a class="btn btn-danger"
+                                            href="usuarios/eliminar/<%=usuarios[i]._id%>">Eliminar</a>
+                                    </td>
+                                </tr>
+                                <%} %>
+                                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 

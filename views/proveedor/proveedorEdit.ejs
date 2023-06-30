@@ -1,0 +1,54 @@
+<%- include("../partials/header") %>
+
+    <title>Editar proveedor</title>
+
+
+        <div class="container mx-5 my-5">
+            <div class="row mx-5">
+                <div class="col-md-8">
+                    <div class="card">
+                        <h5 class="modal-title text-center">Editar Proveedor</h5>
+                        <div class="card-body">
+                            <form action="/proveedor/update/<%= proveedor._id %> " method="post">
+                                <div class="form-group mt-2">
+                                    <input type="text" name="id_Proveedor" value="<%= proveedor.id_Proveedor %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="nit" value="<%= proveedor.nit %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="nombre" value="<%= proveedor.nombre %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="telefono" value="<%= proveedor.telefono %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="email" value="<%= proveedor.email %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="direccion" value="<%= proveedor.direccion %>" class="form-control" required>
+                                </div>
+                                <select class="form-select mt-2" name="estado" id="estado" required>
+                                    <option value="<%= proveedor.estado %>" selected><%= proveedor.estado %></option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="nombre_PE" value="<%= proveedor.nombre_PE %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="telefono_PE" value="<%= proveedor.telefono_PE %>" class="form-control" required>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-success mt-4">Guardar</button>
+                                    <a class="btn btn-danger mt-4" href="/proveedor">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <%- include("../partials/footer") %>

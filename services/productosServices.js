@@ -4,7 +4,7 @@ const {MongoClient, ObjectId} = require("mongodb")
 
 const uri = 'mongodb+srv://admin:admin@cluster0.b7rbibw.mongodb.net/?retryWrites=true&w=majority'
 
-class proveedorService {
+class productosService {
 
     constructor() { }
 
@@ -15,8 +15,8 @@ class proveedorService {
         const client = new MongoClient(uri);
         try {
             await client.connect();
-            const proveedor = await client.db("psbarber").collection("proveedor").find({}).toArray();
-            return proveedor;
+            const productos = await client.db("psbarber").collection("productos").find({}).toArray();
+            return productos;
         } catch (e) {
             console.log(e);
         } finally {
@@ -31,7 +31,7 @@ class proveedorService {
         const client = new MongoClient(uri)
         try {
             await client.connect()
-            const result = await client.db('psbarber').collection('proveedor').insertOne(body);
+            const result = await client.db('psbarber').collection('productos').insertOne(body);
             return result;
         } catch(error){
             console.error(error)
@@ -42,12 +42,12 @@ class proveedorService {
 
     //3. UPDATE
     //updateOne()
-    async updateOne(id, id_Proveedor, nit, nombre, telefono, email, direccion,estado,nombre_PE, telefono_PE) {
+    async updateOne(id, id_Producto, nombre,precio,cantidad,estado,fk_Proveedor) {
         const client = new MongoClient(uri)
         try {
             await client.connect()
-            const proveedor = await client.db('psbarber').collection('proveedor').updateOne({ _id: new ObjectId(id) }, { $set: { id_Proveedor: id_Proveedor, nit:nit, nombre:nombre, telefono:telefono, email:email, direccion:direccion,estado:estado, nombre_PE:nombre_PE, telefono_PE:telefono_PE } })
-            return proveedor
+            const productos = await client.db('psbarber').collection('productos').updateOne({ _id: new ObjectId(id) }, { $set: { id_Producto:id_Producto, nombre:nombre, precio:precio, cantidad:cantidad, estado:estado,fk_Proveedor:fk_Proveedor } })
+            return productos
         } catch(e){
             console.log(e);
         } finally {
@@ -62,8 +62,8 @@ class proveedorService {
         const client = new MongoClient(uri)
         try {
             await client.connect()
-            const proveedor = await client.db('psbarber').collection('proveedor').deleteOne({ _id: new ObjectId(id) })
-            return proveedor
+            const productos = await client.db('psbarber').collection('productos').deleteOne({ _id: new ObjectId(id) })
+            return productos
         } catch(e){
             console.log(e);
         } finally {
@@ -74,4 +74,4 @@ class proveedorService {
 
 }
 
-module.exports = proveedorService;
+module.exports = productosService;

@@ -1,0 +1,36 @@
+<%- include("../partials/header") %>
+
+        <div class="container mx-5 my-5">
+            <div class="row mx-5">
+                <div class="col-md-8">
+                    <div class="card">
+                        <h5 class="modal-title text-center">Editar compras</h5>
+                        <div class="card-body">
+                            <form action="/compras/update/<%= compras._id %> " method="post">
+                                <div class="form-group mt-2">
+                                    <input type="text" name="id_Compra" value="<%= compras.id_Compra %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="fecha" value="<%= compras.fecha %>" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="total" value="<%= compras.total %>" class="form-control" required>
+                                </div>
+                                <select class="form-select mt-2" name="estado" id="estado" required>
+                                    <option value="<%= compras.estado %>" selected><%= compras.estado %></option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-success mt-4">Guardar</button>
+                                    <a class="btn btn-danger mt-4" href="/compras">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <%- include("../partials/footer") %>

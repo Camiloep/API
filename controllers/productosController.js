@@ -1,14 +1,14 @@
 const { MongoClient} = require('mongodb');
-const  uri = "mongodb+srv://admin:admin@cluster0.49jaesh.mongodb.net/?retryWrites=true&w=majority"
+const  uri = "mongodb+srv://admin:admin@cluster0.b7rbibw.mongodb.net/?retryWrites=true&w=majority"
 const controller = {}
 
-controller.ListarUs = async(req,res)=>{
+controller.Listarproductos = async(req,res)=>{
     const client = new MongoClient(uri) // usamos el mongoclient y le pasamos la uri, para acceder a la base de datos 
         try {
             await client.connect() 
-            const usuarios = await client.db("psbarber").collection("usuarios").find({}).toArray()
-            if(usuarios){
-                res.render('./usuarios/index.ejs', {usuarios});
+            const productos = await client.db("psbarber").collection("productos").find({}).toArray()
+            if(productos){
+                res.render('./productos/productos', {productos});
             }else{
                 res.status(404).send("No se encontro la informacion");
             }
@@ -18,15 +18,15 @@ controller.ListarUs = async(req,res)=>{
            await client.close()
         }
     }
-controller.editarUs = async (req, res) => {
+controller.editarproductos = async (req, res) => {
         const id = req.params.id;
         const client = new MongoClient(uri);
         try {
             await client.connect();
-            const usuarios = await client.db('psbarber').collection('usuarios').findbyId({_id: new ObjectId(id)});
-            console.log(usuarios);
-            if (usuarios) {
-                res.render('./usuarios/usuariosEdit', {usuarios});
+            const productos = await client.db('psbarber').collection('productos').findbyId({_id: new ObjectId(id)});
+            console.log(productos);
+            if (productos) {
+                res.render('./productos/productosEdit', {productos});
             }else{
                 res.status(404).send("No se encontro la informacion")
             }

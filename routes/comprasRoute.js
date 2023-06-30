@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { MongoClient, ObjectId } = require('mongodb');
 
-const proveedorService = require('../services/proveedorService')
+const comprasService = require('../services/comprasServices')
  
 
 
@@ -10,15 +10,15 @@ const uri = 'mongodb+srv://admin:admin@cluster0.b7rbibw.mongodb.net/?retryWrites
 // CREAR las rutas 
 
 const router = express.Router();
-const service = new proveedorService();
+const service = new comprasService();
 
 
 //2.1 find()
 router.get('/', async (req, res) => {
     const { limit, offset } = req.query;
-    const proveedor = await service.find();
-    if (proveedor) {
-        res.render("./proveedor/proveedor.ejs", {proveedor});
+    const compras = await service.find();
+    if (compras) {
+        res.render("./compras/compras.ejs", {compras});
     } else {
         res.status(404).send("No se encontro la información");//res.send("No se encontro la informacion");
     }
@@ -28,10 +28,10 @@ router.get('/', async (req, res) => {
 //1.1 insertOne()
 router.post('/', async (req, res) => {
     const body = req.body
-    const proveedor = await service.insertOne(body);
-    if(proveedor){
-        // res.status(201).json({message: "se insertaron los en la base de datos ", proveedor})
-        res.redirect("/proveedor")
+    const compras = await service.insertOne(body);
+    if(compras){
+        // res.status(201).json({message: "se insertaron los en la base de datos ", compras})
+        res.redirect("/compras")
     }else{
         res.status(400).send("No se registro el provedor")
     }
@@ -45,10 +45,10 @@ router.get("/edit/:id", async (req,res)=>{
     const client = new MongoClient(uri)
     try {
         await client.connect();
-        const proveedor = await client.db('psbarber').collection('proveedor').findOne({_id: new ObjectId(id)});
-        console.log(proveedor);
-        if (proveedor) {
-            res.render('./proveedor/proveedorEdit', {proveedor});
+        const compras = await client.db('psbarber').collection('compras').findOne({_id: new ObjectId(id)});
+        console.log(compras);
+        if (compras) {
+            res.render('./compras/comprasEdit', {compras});
             
         }else{
             res.status(404).send("No se encontro la informacion")
@@ -63,13 +63,13 @@ router.get("/edit/:id", async (req,res)=>{
 //3.1 updateOne
 router.post("/update/:id", async(req, res) => {
     const id = req.params.id;
-    const { id_Proveedor,nit, nombre,telefono,email, direccion, estado, nombre_PE, telefono_PE }= req.body;
-    const proveedor = await service.updateOne(id,id_Proveedor,nit, nombre,telefono,email, direccion, estado, nombre_PE, telefono_PE);
-        if(proveedor){
-            // res.status(201).json({message: "se actualizaron los proveedor en la base de datos ",proveedor})
-            res.redirect("/proveedor")
+    const { id_Compra, fecha, total, estado }= req.body;
+    const compras = await service.updateOne(id, id_Compra, fecha, total, estado);
+        if(compras){
+            // res.status(201).json({message: "se actualizaron los compras en la base de datos ",compras})
+            res.redirect("/compras")
         }else{
-            res.status(404).send("no se pudo actualizar el proveedor ")
+            res.status(404).send("no se pudo actualizar el compras ")
         }
 })
 
@@ -78,10 +78,10 @@ router.post("/update/:id", async(req, res) => {
 router.get('/eliminar/:id', async (req, res) => {
     const id = req.params.id;
     
-    const proveedor = await service.deleteOne(id)
-        if (proveedor) {
-            // res.status(200).json({message: "se elimino el usuario correctamente ",proveedor})
-            res.redirect("/proveedor")
+    const compras = await service.deleteOne(id)
+        if (compras) {
+            // res.status(200).json({message: "se elimino el usuario correctamente ",compras})
+            res.redirect("/compras")
         }else{
             res.status(400).send(" no se elimino el usuario correctamente")
         }

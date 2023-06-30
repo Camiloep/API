@@ -1,0 +1,97 @@
+<%- include("../partials/header")%>
+
+    <!-- Button trigger modal -->
+    <div class="container">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success my-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Agregar compras
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Agregar compras</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-ms-10">
+                            <form action="/compras" method="post">
+                                <div class="form-group mt-2">
+                                    <input type="text" name="id_Compra" placeholder="ID Compra"
+                                        class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="date" name="fecha" placeholder="Fecha de la compra" class="form-control" required>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <input type="text" name="total" placeholder="Total" class="form-control" required>
+                                </div>
+                                <select class="form-select mt-2" name="estado" id="estado" required>
+                                    <option value="" selected disabled>Seleccione el estado</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mt-4">Guardar</button>
+                                    <button type="button" class="btn btn-secondary mt-4"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <div class="col-md-12">
+                <table id="example" class="table table-bordered table-hover me-5">
+                        <thead class="bg-dark text-white text-center">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">fecha</th>
+                                <th scope="col">total</th>
+                                <th scope="col">estado</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <% if(compras){ %>
+                                <% for(let i=0; i < compras.length; i++ ){%>
+                                    <tr>
+                                        <td>
+                                            <%= (i+1) %>
+                                        </td>
+                                        <td>
+                                            <%= compras[i].id_Compra %>
+                                        </td>
+                                        <td>
+                                            <%= compras[i].fecha %>
+                                        </td>
+                                        <td>
+                                            <%= compras[i].total %>
+                                        </td>
+                                        <td>
+                                            <%= compras[i].estado %>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" href="compras/edit/<%=compras[i]._id%>"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
+                                                <a class="btn btn-danger" href="compras/eliminar/<%=compras[i]._id%>"><i
+                                                    class="fa-solid fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <%} %>
+                                        <% } %>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <%- include("../partials/footer")%>

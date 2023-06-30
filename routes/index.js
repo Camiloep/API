@@ -4,6 +4,8 @@ const routesUsuarios = require("./usuarios")// aqui van cada uno de los modulos
 const routesRoles = require("./roles")
 const routesPermisos = require("./permisos")
 const proveedorRouter = require('./proveedorRouter');
+const productosRoutes = require('./productosRoute');
+const comprasRoute = require('./comprasRoute');
 const clientesRouter = require('./clientes');
 const serviciosRouter = require('./servicios');
 const ventasRouter = require('./ventas');
@@ -22,6 +24,8 @@ const rutasApi = (app) =>{
     app.use("/roles",routesRoles)
     app.use("/permisos",routesPermisos)
     app.use('/proveedor', proveedorRouter);
+    app.use("/productos", productosRoutes)
+    app.use('/compras', comprasRoute);
     app.use('/clientes', clientesRouter);
     app.use('/servicios', serviciosRouter);
     app.use('/ventas', ventasRouter);
